@@ -4,179 +4,447 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Works Portfolio｜AIで、つくる。</title>
-<meta name="description" content="生成AIを活用して制作した成果物をまとめたポートフォリオ。ゲーム制作・インフォグラフィックなどの実績を掲載しています。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff2e8b'/%3E%3Cstop offset='1' stop-color='%237a3ff2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="description" content="生成AIを活用して制作した成果物（ゲーム・インフォグラフィックなど）のポートフォリオ。クリックで拡大表示、カテゴリで絞り込みできます。">
 
-<!-- OGP / Twitter Card -->
-<meta property="og:type" content="website">
+<!-- OGP -->
 <meta property="og:title" content="AI Works Portfolio｜AIで、つくる。">
-<meta property="og:description" content="生成AIを活用して制作した成果物をまとめたポートフォリオ。">
-<meta property="og:image" content="https://ayknkmr0123.github.io/ai-works-portfolio/images/work-ai-tools.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="生成AIで制作した成果物をまとめたポートフォリオサイト。">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
   :root{
     /* === design_prompt_unikoukokun.yaml 準拠 === */
+    /* neutral：あたたかい白〜クリーム（土台65%） */
     --canvas:#ffffff;
     --canvas-warm:#fff6ef;
     --surface:#fffaf6;
     --border:#f1e8e1;
     --ink:#2b2b2b;
     --ink-sub:#6b6b6b;
+    /* primary：ビビッドなマゼンタ・ピンク（主役20%） */
     --primary:#ff2e8b;
     --primary-deep:#e01f76;
     --primary-light:#ffd6e8;
+    --on-primary:#ffffff;
+    /* accent：暖色＋パープル（差し色15%） */
     --orange:#ff7a1a;
+    --coral:#ff5a3c;
     --amber:#ffab2e;
     --purple:#7a3ff2;
+    --pink-soft:#ff74ab;
+    /* shape */
+    --r-default:16px;
+    --r-card:20px;
+    --r-pill:999px;
+    /* elevation：低不透明・広ぼかしの暖色みシャドウ */
     --shadow-soft:0 8px 24px -6px rgba(120,60,30,.12);
     --shadow-float:0 16px 40px -10px rgba(120,60,30,.16);
+    /* motion */
+    --ease:cubic-bezier(.4,.4,0,1);
   }
+
   *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{height:100%;}
+  html{scroll-behavior:smooth;}
   body{
     font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic UI",sans-serif;
     color:var(--ink);
-    height:100vh;
-    overflow:hidden;                 /* 1ページ・スクロールなし */
-    display:flex;
-    flex-direction:column;
-    padding:clamp(24px,4vw,48px);
+    line-height:1.7;
     background:
-      radial-gradient(120% 90% at 100% 0%,#ffe9d6 0%,rgba(255,233,214,0) 55%),
-      radial-gradient(120% 90% at 0% 100%,#ffe1ef 0%,rgba(255,225,239,0) 50%),
+      radial-gradient(120% 80% at 100% -5%,#ffe9d6 0%,rgba(255,233,214,0) 50%),
+      radial-gradient(110% 80% at -5% 105%,#ffe1ef 0%,rgba(255,225,239,0) 48%),
       var(--canvas-warm);
+    background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(20px,5vw,40px);}
+
+  /* ── ピル型ラベル（共通あしらい） ── */
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;letter-spacing:.16em;font-weight:700;
+    color:var(--primary);
+    background:var(--primary-light);
+    padding:6px 16px;border-radius:var(--r-pill);
   }
 
-  /* ── ヘッダー ── */
-  header{flex:0 0 auto;margin-bottom:clamp(18px,3vh,32px);}
-  .eyebrow{
-    display:inline-block;font-size:12px;letter-spacing:.16em;font-weight:700;
-    color:var(--primary);background:var(--primary-light);
-    padding:5px 14px;border-radius:999px;
+  /* ── ヘッダーナビ ── */
+  .nav{
+    position:sticky;top:0;z-index:30;
+    backdrop-filter:saturate(1.4) blur(10px);
+    background:rgba(255,250,246,.78);
+    border-bottom:1px solid var(--border);
   }
-  h1{
-    font-size:clamp(34px,5.4vw,60px);font-weight:900;letter-spacing:-.01em;
-    line-height:1.05;margin:12px 0 10px;
+  .nav-inner{
+    max-width:1080px;margin:0 auto;
+    padding:14px clamp(20px,5vw,40px);
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .brand{
+    font-weight:900;font-size:18px;letter-spacing:-.01em;
+    background:linear-gradient(100deg,var(--primary),var(--purple));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .nav-links{display:flex;gap:8px;align-items:center;}
+  .nav-links a{
+    font-size:13px;font-weight:700;color:var(--ink-sub);
+    text-decoration:none;padding:7px 14px;border-radius:var(--r-pill);
+    transition:color .25s var(--ease),background .25s var(--ease);
+  }
+  .nav-links a:hover{color:var(--primary);background:var(--primary-light);}
+  .nav-cta{
+    color:var(--on-primary)!important;
+    background:linear-gradient(100deg,var(--primary),var(--orange));
+    box-shadow:var(--shadow-soft);
+  }
+  .nav-cta:hover{background:linear-gradient(100deg,var(--primary-deep),var(--orange))!important;}
+  @media(max-width:560px){.nav-links a:not(.nav-cta){display:none;}}
+
+  /* ── ヒーロー ── */
+  .hero{padding:clamp(56px,9vw,104px) 0 clamp(40px,6vw,72px);text-align:center;}
+  .hero h1{
+    font-size:clamp(40px,8.4vw,86px);
+    font-weight:900;line-height:1.02;letter-spacing:-.02em;
+    margin:20px 0 18px;
     background:linear-gradient(100deg,var(--primary) 0%,var(--purple) 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  h1 .spark{-webkit-text-fill-color:initial;color:var(--amber);font-size:.7em;}
-  .lead{font-size:clamp(13px,1.4vw,16px);color:var(--ink-sub);max-width:580px;}
+  .hero h1 .spark{-webkit-text-fill-color:initial;color:var(--amber);font-size:.62em;vertical-align:.06em;}
+  .hero .lead{
+    font-size:clamp(15px,1.7vw,18px);color:var(--ink-sub);
+    max-width:600px;margin:0 auto;
+  }
+  /* スウォッシュ風の帯あしらい */
+  .hero .swoosh{
+    display:block;width:clamp(90px,18vw,160px);height:6px;margin:26px auto 0;
+    border-radius:var(--r-pill);
+    background:linear-gradient(100deg,var(--coral),var(--orange),var(--amber));
+  }
+  /* 数字を強く見せるミニ実績 */
+  .stats{
+    display:flex;justify-content:center;gap:clamp(24px,6vw,64px);
+    margin-top:clamp(36px,5vw,52px);flex-wrap:wrap;
+  }
+  .stat{text-align:center;}
+  .stat b{
+    display:block;font-size:clamp(30px,5vw,46px);font-weight:900;line-height:1;
+    background:linear-gradient(100deg,var(--coral),var(--orange));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .stat span{font-size:12px;font-weight:700;color:var(--ink-sub);letter-spacing:.06em;}
+
+  /* ── セクション共通 ── */
+  section{padding:clamp(44px,7vw,80px) 0;}
+  .sec-head{text-align:center;margin-bottom:clamp(28px,4vw,44px);}
+  .sec-head h2{
+    font-size:clamp(28px,4.6vw,44px);font-weight:900;letter-spacing:-.01em;margin-top:12px;
+  }
+  .sec-head h2 em{
+    font-style:normal;
+    background:linear-gradient(100deg,var(--primary),var(--purple));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sec-head p{color:var(--ink-sub);margin-top:8px;font-size:14px;}
+
+  /* ── フィルタタブ（ピル型） ── */
+  .filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,40px);}
+  .filter{
+    font-size:13px;font-weight:700;cursor:pointer;
+    color:var(--ink-sub);background:var(--canvas);
+    border:1px solid var(--border);
+    padding:9px 20px;border-radius:var(--r-pill);
+    transition:all .25s var(--ease);
+  }
+  .filter:hover{color:var(--primary);border-color:var(--primary-light);transform:translateY(-2px);}
+  .filter.active{
+    color:var(--on-primary);border-color:transparent;
+    background:linear-gradient(100deg,var(--primary),var(--orange));
+    box-shadow:var(--shadow-soft);
+  }
 
   /* ── 作品グリッド ── */
-  .gallery{
-    flex:1 1 auto;min-height:0;display:grid;
-    grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.2vw,28px);
-  }
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2.6vw,30px);}
+  @media(max-width:720px){.gallery{grid-template-columns:1fr;}}
+
   .card{
-    position:relative;min-height:0;border:1px solid var(--border);
-    border-radius:20px;overflow:hidden;background:var(--surface);cursor:pointer;
-    display:flex;flex-direction:column;box-shadow:var(--shadow-soft);
-    transition:transform .28s cubic-bezier(.4,.4,0,1),box-shadow .28s cubic-bezier(.4,.4,0,1);
+    position:relative;border:1px solid var(--border);border-radius:var(--r-card);
+    overflow:hidden;background:var(--surface);cursor:pointer;
+    display:flex;flex-direction:column;
+    box-shadow:var(--shadow-soft);
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease),opacity .3s var(--ease);
   }
-  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-float);}
-  .card:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+  .card:hover{transform:translateY(-7px);box-shadow:var(--shadow-float);}
+  .card:hover .thumb img{transform:scale(1.04);}
+  .card:hover .zoom{opacity:1;transform:translateY(0);}
+  /* フィルタで隠す */
+  .card.hide{display:none;}
+
   .thumb{
-    flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;
-    padding:18px;background:radial-gradient(120% 120% at 50% 0%,#ffffff 0%,#fff1e6 100%);
+    position:relative;aspect-ratio:16/11;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    background:radial-gradient(120% 120% at 50% 0%,#ffffff 0%,#fff1e6 100%);
   }
-  .thumb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;}
-  .meta{flex:0 0 auto;padding:14px 18px 16px;border-top:1px solid var(--border);background:#fff;}
-  .meta h2{font-size:clamp(15px,1.6vw,18px);font-weight:700;}
-  .tags{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;}
+  .thumb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;transition:transform .4s var(--ease);}
+  .zoom{
+    position:absolute;top:14px;right:14px;
+    font-size:11px;font-weight:700;color:var(--on-primary);
+    background:rgba(43,43,43,.7);padding:5px 12px;border-radius:var(--r-pill);
+    opacity:0;transform:translateY(-6px);transition:all .3s var(--ease);
+    backdrop-filter:blur(4px);
+  }
+  .meta{flex:0 0 auto;padding:16px 20px 18px;border-top:1px solid var(--border);background:#fff;}
+  .meta h3{font-size:clamp(16px,1.8vw,19px);font-weight:700;letter-spacing:-.01em;}
+  .meta .desc{font-size:13px;color:var(--ink-sub);margin-top:4px;}
+  .tags{margin-top:11px;display:flex;gap:7px;flex-wrap:wrap;}
   .tag{
     font-size:11px;font-weight:700;color:var(--ink-sub);
-    background:#f6efe9;border-radius:999px;padding:4px 11px;
+    background:#f6efe9;border-radius:var(--r-pill);padding:4px 12px;
   }
-  .tag.ai{color:#fff;background:linear-gradient(100deg,var(--primary) 0%,var(--orange) 100%);}
+  .tag.ai{
+    color:var(--on-primary);
+    background:linear-gradient(100deg,var(--primary),var(--orange));
+  }
+
+  /* ── About ── */
+  .about{
+    background:var(--canvas);border:1px solid var(--border);border-radius:var(--r-card);
+    padding:clamp(28px,4vw,48px);box-shadow:var(--shadow-soft);
+    display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,40px);align-items:center;
+  }
+  @media(max-width:620px){.about{grid-template-columns:1fr;text-align:center;}}
+  .avatar{
+    width:96px;height:96px;border-radius:50%;margin:0 auto;
+    display:flex;align-items:center;justify-content:center;font-size:42px;
+    background:linear-gradient(135deg,var(--primary),var(--purple));
+    box-shadow:var(--shadow-soft);
+  }
+  .about h3{font-size:22px;font-weight:900;margin-bottom:8px;}
+  .about p{color:var(--ink-sub);font-size:14.5px;}
+  .about .chips{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;}
+  @media(max-width:620px){.about .chips{justify-content:center;}}
+  .chip{font-size:12px;font-weight:700;color:var(--primary);background:var(--primary-light);padding:5px 14px;border-radius:var(--r-pill);}
+
+  /* ── フッター ── */
+  footer{
+    text-align:center;padding:clamp(36px,6vw,60px) 0 44px;
+    border-top:1px dashed var(--border);margin-top:clamp(40px,6vw,72px);
+  }
+  footer .brand{font-size:22px;}
+  footer p{font-size:12.5px;color:var(--ink-sub);margin-top:10px;}
 
   /* ── ライトボックス ── */
   .lb{
-    position:fixed;inset:0;background:rgba(40,20,30,.78);display:none;
-    align-items:center;justify-content:center;padding:5vh 5vw;z-index:50;
+    position:fixed;inset:0;background:rgba(40,20,30,.82);
+    display:none;align-items:center;justify-content:center;
+    padding:5vh 5vw;z-index:60;
+    -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
   }
-  .lb.open{display:flex;}
-  .lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.45);}
+  .lb.open{display:flex;animation:lbIn .25s var(--ease);}
+  @keyframes lbIn{from{opacity:0;}to{opacity:1;}}
+  .lb figure{max-width:100%;max-height:100%;display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .lb img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.45);}
+  .lb figcaption{color:#fff;font-weight:700;font-size:15px;text-align:center;}
   .lb-close{
-    position:absolute;top:22px;right:26px;width:44px;height:44px;border-radius:50%;
-    border:none;cursor:pointer;background:var(--primary);color:#fff;font-size:22px;
+    position:absolute;top:22px;right:26px;width:46px;height:46px;border-radius:50%;
+    border:none;cursor:pointer;background:var(--primary);color:#fff;font-size:24px;
     box-shadow:var(--shadow-soft);transition:background .2s,transform .2s;
   }
-  .lb-close:hover{background:var(--primary-deep);transform:scale(1.06);}
+  .lb-close:hover{background:var(--primary-deep);transform:scale(1.08);}
+  .lb-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;
+    background:rgba(255,255,255,.92);color:var(--ink);font-size:22px;font-weight:700;
+    box-shadow:var(--shadow-soft);transition:transform .2s,background .2s;
+  }
+  .lb-nav:hover{transform:translateY(-50%) scale(1.08);background:#fff;}
+  .lb-prev{left:18px;} .lb-next{right:18px;}
+  @media(max-width:560px){.lb-nav{width:40px;height:40px;}}
 
-  /* ── レスポンシブ：狭い画面はスクロール許可で縦積み ── */
-  @media(max-width:680px){
-    body{overflow:auto;height:auto;min-height:100vh;}
-    .gallery{grid-template-columns:1fr;}
-    .card{min-height:60vh;}
+  /* ── 出現アニメ（フェード＋上スライド） ── */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
   }
 </style>
 </head>
 <body>
 
-  <header>
-    <span class="eyebrow">AI WORKS PORTFOLIO</span>
-    <h1>AIで、つくる。<span class="spark">✨</span></h1>
-    <p class="lead">生成AIを活用して制作した成果物をまとめています。各作品はクリックで拡大表示できます。</p>
+  <!-- ナビ -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand" style="text-decoration:none">AI Works ✨</a>
+      <nav class="nav-links">
+        <a href="#works">作品</a>
+        <a href="#about">About</a>
+        <a href="#works" class="nav-cta">作品を見る</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="gallery">
-
-    <figure class="card" tabindex="0" role="button" aria-label="ネオン・テトリスを拡大表示" data-img="images/work-tetris.png">
-      <div class="thumb">
-        <img src="images/work-tetris.png" alt="ネオンカラーで描かれたブラウザ版テトリスゲームの画面" loading="lazy">
+  <!-- ヒーロー -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <span class="eyebrow reveal">AI WORKS PORTFOLIO</span>
+      <h1 class="reveal">AIで、つくる。<span class="spark">✨</span></h1>
+      <p class="lead reveal">生成AIを活用して制作した成果物をまとめたポートフォリオです。<br>気になる作品はクリックで拡大表示できます。</p>
+      <span class="swoosh reveal"></span>
+      <div class="stats reveal">
+        <div class="stat"><b>2</b><span>WORKS</span></div>
+        <div class="stat"><b>2</b><span>AI TOOLS</span></div>
+        <div class="stat"><b>∞</b><span>IDEAS</span></div>
       </div>
-      <figcaption class="meta">
-        <h2>ネオン・テトリス（ブラウザゲーム）</h2>
-        <div class="tags">
-          <span class="tag ai">Made with Manus</span>
-          <span class="tag">ゲーム制作</span>
-          <span class="tag">Web</span>
-        </div>
-      </figcaption>
-    </figure>
+    </div>
+  </section>
 
-    <figure class="card" tabindex="0" role="button" aria-label="主要AIツール5選インフォグラフィックを拡大表示" data-img="images/work-ai-tools.png">
-      <div class="thumb">
-        <img src="images/work-ai-tools.png" alt="主要AIツール5選を紹介するインフォグラフィック" loading="lazy">
+  <!-- 作品 -->
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">WORKS</span>
+        <h2>制作<em>実績</em></h2>
+        <p>カテゴリで絞り込み、クリックで拡大できます。</p>
       </div>
-      <figcaption class="meta">
-        <h2>主要AIツール5選 インフォグラフィック</h2>
-        <div class="tags">
-          <span class="tag ai">NotebookLM</span>
-          <span class="tag">情報設計</span>
-          <span class="tag">デザイン</span>
-        </div>
-      </figcaption>
-    </figure>
 
-  </main>
+      <div class="filters reveal">
+        <button class="filter active" data-filter="all" aria-pressed="true">すべて</button>
+        <button class="filter" data-filter="game" aria-pressed="false">ゲーム制作</button>
+        <button class="filter" data-filter="design" aria-pressed="false">情報設計・デザイン</button>
+      </div>
+
+      <div class="gallery">
+
+        <figure class="card reveal" data-cat="game"
+                data-img="images/work-tetris.png"
+                data-title="ネオン・テトリス（ブラウザゲーム）">
+          <div class="thumb">
+            <span class="zoom">＋ 拡大</span>
+            <img src="images/work-tetris.png" alt="ネオンカラーで光るブラウザ版テトリスゲームの画面" loading="lazy">
+          </div>
+          <figcaption class="meta">
+            <h3>ネオン・テトリス</h3>
+            <p class="desc">スコア・レベル・NEXT表示を備えたブラウザ版テトリス。</p>
+            <div class="tags">
+              <span class="tag ai">Made with Manus</span>
+              <span class="tag">ゲーム制作</span>
+              <span class="tag">Web</span>
+            </div>
+          </figcaption>
+        </figure>
+
+        <figure class="card reveal" data-cat="design"
+                data-img="images/work-infographic.png"
+                data-title="主要AIツール5選 インフォグラフィック">
+          <div class="thumb">
+            <span class="zoom">＋ 拡大</span>
+            <img src="images/work-infographic.png" alt="デザイン副業向け主要AIツール5選を整理したインフォグラフィック" loading="lazy">
+          </div>
+          <figcaption class="meta">
+            <h3>主要AIツール5選 インフォグラフィック</h3>
+            <p class="desc">用途・料金・活用法を1枚に整理した情報設計デザイン。</p>
+            <div class="tags">
+              <span class="tag ai">NotebookLM</span>
+              <span class="tag">情報設計</span>
+              <span class="tag">デザイン</span>
+            </div>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about reveal">
+        <div class="avatar">🎨</div>
+        <div>
+          <h3>AIで“つくる”を楽しむ。</h3>
+          <p>生成AIを相棒に、ゲームからインフォグラフィックまで幅広く制作しています。「アイデアをすばやくカタチにする」をテーマに、ツールを使い分けながらアウトプットを増やしています。</p>
+          <div class="chips">
+            <span class="chip">Manus</span>
+            <span class="chip">NotebookLM</span>
+            <span class="chip">Web制作</span>
+            <span class="chip">情報設計</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="wrap">
+      <a href="#top" class="brand" style="text-decoration:none">AI Works ✨</a>
+      <p>© 2026 AI Works Portfolio. Built with generative AI.</p>
+    </div>
+  </footer>
 
   <!-- ライトボックス -->
   <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="作品の拡大表示">
     <button class="lb-close" id="lbClose" aria-label="閉じる">&times;</button>
-    <img id="lbImg" src="" alt="">
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="前の作品">&#8249;</button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="次の作品">&#8250;</button>
+    <figure>
+      <img id="lbImg" src="" alt="">
+      <figcaption id="lbCap"></figcaption>
+    </figure>
   </div>
 
   <script>
-    const lb = document.getElementById('lb');
-    const lbImg = document.getElementById('lbImg');
-    function openLb(card){
-      lbImg.src = card.dataset.img;
-      lbImg.alt = card.querySelector('img').alt;
-      lb.classList.add('open');
-    }
-    function closeLb(){ lb.classList.remove('open'); lbImg.src=''; }
-    document.querySelectorAll('.card').forEach(card=>{
-      card.addEventListener('click',()=>openLb(card));
-      card.addEventListener('keydown',e=>{
-        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(card); }
+    /* ── フィルタ ── */
+    const filters = document.querySelectorAll('.filter');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    filters.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        filters.forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
+        btn.classList.add('active');btn.setAttribute('aria-pressed','true');
+        const f = btn.dataset.filter;
+        cards.forEach(c=>{
+          const show = (f==='all' || c.dataset.cat===f);
+          c.classList.toggle('hide',!show);
+        });
       });
     });
+
+    /* ── ライトボックス（前後ナビ付き） ── */
+    const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),
+          lbCap=document.getElementById('lbCap');
+    let current=0,lastFocus=null;
+    function visibleCards(){return cards.filter(c=>!c.classList.contains('hide'));}
+    function openLb(card){
+      lastFocus=card;
+      const vis=visibleCards(); current=vis.indexOf(card); render(vis); lb.classList.add('open');
+      document.body.style.overflow='hidden';
+      document.getElementById('lbClose').focus();
+    }
+    function render(vis){
+      const c=vis[current]; lbImg.src=c.dataset.img; lbImg.alt=c.dataset.title; lbCap.textContent=c.dataset.title;
+    }
+    function step(d){const vis=visibleCards(); current=(current+d+vis.length)%vis.length; render(vis);}
+    cards.forEach(card=>card.addEventListener('click',()=>openLb(card)));
+    function closeLb(){lb.classList.remove('open');lbImg.src='';document.body.style.overflow='';if(lastFocus)lastFocus.focus();}
     document.getElementById('lbClose').addEventListener('click',closeLb);
-    lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
+    document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();step(-1);});
+    document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();step(1);});
+    lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+    document.addEventListener('keydown',e=>{
+      if(!lb.classList.contains('open'))return;
+      if(e.key==='Escape')closeLb();
+      if(e.key==='ArrowLeft')step(-1);
+      if(e.key==='ArrowRight')step(1);
+    });
+
+    /* ── スクロール出現アニメ ── */
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el);});
   </script>
 
 </body>
