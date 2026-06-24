@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Works Portfolio</title>
+<meta name="description" content="AIで“作れる”を形にする。AI制作物のポートフォリオ。">
+<style>
+  :root{
+    --bg:#0a0a14;
+    --bg2:#06060f;
+    --panel:#12121f;
+    --panel2:#171728;
+    --cyan:#3ad8ff;
+    --purple:#9b6bff;
+    --yellow:#ffe14d;
+    --line:#2a2a44;
+    --txt:#e8e8f5;
+    --txt2:#cfcfe6;
+    --muted:#8a8aa8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--txt);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,-apple-system,sans-serif;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+  .neon-text{
+    background:linear-gradient(90deg,var(--cyan),var(--purple));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .seclabel{font-size:.72rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;}
+
+  /* ===== Header ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(10,10,20,.6);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s, background .3s;
+  }
+  header.scrolled{border-bottom-color:var(--line);background:rgba(10,10,20,.85);}
+  .nav{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-weight:800;letter-spacing:.03em;font-size:1.05rem;}
+  .logo span{color:var(--cyan);}
+  .nav-links{display:flex;gap:26px;font-size:.85rem;}
+  .nav-links a{color:var(--muted);transition:color .2s;position:relative;}
+  .nav-links a:hover{color:var(--txt);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--txt);font-size:1.4rem;cursor:pointer;}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;
+  }
+  .glow-1{width:520px;height:520px;background:var(--purple);top:-120px;right:-80px;}
+  .glow-2{width:480px;height:480px;background:var(--cyan);bottom:-160px;left:-120px;opacity:.4;}
+  .hero-inner{position:relative;z-index:2;padding-top:64px;}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;line-height:1.15;letter-spacing:.01em;}
+  .hero .sub{color:var(--txt2);font-size:clamp(.95rem,2vw,1.15rem);margin-top:20px;max-width:600px;}
+  .hero .tools{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .tool-pill{font-size:.74rem;padding:5px 13px;border:1px solid var(--line);border-radius:20px;color:var(--muted);}
+  .cta{
+    display:inline-block;margin-top:34px;padding:13px 30px;border-radius:30px;
+    background:linear-gradient(90deg,var(--cyan),var(--purple));
+    color:#06060f;font-weight:700;font-size:.92rem;
+    box-shadow:0 0 28px rgba(58,216,255,.45);transition:transform .2s, box-shadow .3s;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(155,107,255,.6);}
+  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.7rem;letter-spacing:.2em;animation:bob 1.8s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+
+  /* ===== Section common ===== */
+  section{padding:96px 0;}
+  .sec-head{text-align:center;margin-bottom:48px;}
+  .sec-head h2{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;margin-top:8px;}
+
+  /* ===== Works ===== */
+  .filters{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+  .filter-btn{
+    font-size:.8rem;padding:8px 18px;border-radius:22px;cursor:pointer;
+    background:var(--panel);border:1px solid var(--line);color:var(--muted);transition:all .2s;
+  }
+  .filter-btn:hover{color:var(--txt);border-color:var(--cyan);}
+  .filter-btn.active{
+    background:rgba(58,216,255,.12);color:var(--cyan);border-color:var(--cyan);
+    box-shadow:0 0 14px rgba(58,216,255,.25);
+  }
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    cursor:pointer;transition:transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .card:hover{transform:translateY(-6px);border-color:var(--purple);box-shadow:0 14px 36px rgba(0,0,0,.5),0 0 22px rgba(155,107,255,.2);}
+  .card-img{aspect-ratio:16/10;overflow:hidden;background:var(--bg2);}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+  .card:hover .card-img img{transform:scale(1.05);}
+  .card-body{padding:15px 17px 18px;}
+  .card-body h3{font-size:1rem;font-weight:700;}
+  .card-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{font-size:.68rem;padding:3px 10px;border-radius:14px;border:1px solid var(--line);color:var(--muted);}
+  .tag.cyan{color:var(--cyan);border-color:rgba(58,216,255,.5);}
+  .tag.purple{color:var(--purple);border-color:rgba(155,107,255,.5);}
+
+  /* ===== About ===== */
+  .about-wrap{
+    background:radial-gradient(circle at 85% 0%, rgba(255,225,77,.08), var(--panel) 55%);
+    border:1px solid var(--line);border-radius:20px;padding:42px 38px;
+    display:grid;grid-template-columns:160px 1fr;gap:36px;align-items:start;
+  }
+  .avatar{
+    width:140px;height:140px;border-radius:50%;margin:0 auto;
+    background:linear-gradient(135deg,#1b1b3a,#3a1b5a);
+    border:2px solid var(--yellow);box-shadow:0 0 22px rgba(255,225,77,.3);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.72rem;text-align:center;
+    overflow:hidden;
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;}
+  .about-name{text-align:center;margin-top:14px;}
+  .about-name .nm{font-weight:800;font-size:1.05rem;}
+  .about-name .role{font-size:.74rem;color:var(--muted);}
+  .about-lead{font-size:1.15rem;font-weight:700;margin-bottom:12px;}
+  .about-text{color:var(--txt2);font-size:.92rem;margin-bottom:24px;}
+  .skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .skill-box{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;}
+  .skill-box .lab{font-size:.66rem;letter-spacing:.14em;margin-bottom:11px;}
+  .skill-box.t-yellow .lab{color:var(--yellow);}
+  .skill-box.t-cyan .lab{color:var(--cyan);}
+  .chip{display:inline-block;font-size:.72rem;padding:5px 12px;border-radius:18px;margin:3px 5px 3px 0;border:1px solid var(--line);color:var(--txt2);}
+  .skill-box.t-yellow .chip{border-color:rgba(255,225,77,.5);color:var(--yellow);}
+  .skill-box.t-cyan .chip{border-color:rgba(58,216,255,.5);color:var(--cyan);}
+  .about-socials{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;}
+  .about-socials a{font-size:.8rem;color:var(--muted);border:1px solid var(--line);padding:7px 16px;border-radius:20px;transition:all .2s;}
+  .about-socials a:hover{color:var(--cyan);border-color:var(--cyan);}
+
+  /* ===== Contact ===== */
+  .contact{text-align:center;}
+  .contact .lead{color:var(--txt2);max-width:520px;margin:0 auto 30px;}
+  .contact-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+  .btn-primary,.btn-ghost{padding:13px 30px;border-radius:30px;font-weight:700;font-size:.9rem;transition:transform .2s,box-shadow .3s;}
+  .btn-primary{background:linear-gradient(90deg,var(--cyan),var(--purple));color:#06060f;box-shadow:0 0 24px rgba(58,216,255,.4);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--txt);}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--muted);font-size:.78rem;}
+
+  /* ===== Lightbox ===== */
+  .lightbox{
+    position:fixed;inset:0;z-index:100;background:rgba(4,4,10,.92);
+    display:none;align-items:center;justify-content:center;padding:30px;
+    backdrop-filter:blur(6px);
+  }
+  .lightbox.open{display:flex;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;}to{opacity:1;}}
+  .lb-inner{max-width:920px;width:100%;text-align:center;}
+  .lb-inner img{max-height:74vh;width:auto;margin:0 auto;border-radius:12px;border:1px solid var(--line);box-shadow:0 0 50px rgba(155,107,255,.25);}
+  .lb-caption{margin-top:18px;}
+  .lb-caption h3{font-size:1.15rem;font-weight:700;}
+  .lb-caption p{color:var(--txt2);font-size:.88rem;margin-top:6px;}
+  .lb-close{position:absolute;top:22px;right:28px;background:none;border:none;color:var(--txt);font-size:2rem;cursor:pointer;line-height:1;}
+  .lb-close:hover{color:var(--cyan);}
+
+  /* ===== Reveal animation ===== */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.show{opacity:1;transform:none;}
+
+  /* ===== Responsive ===== */
+  @media(max-width:720px){
+    .nav-links{
+      position:fixed;top:64px;right:0;flex-direction:column;gap:0;
+      background:var(--panel);border-left:1px solid var(--line);border-bottom:1px solid var(--line);
+      width:180px;transform:translateX(100%);transition:transform .3s;
+    }
+    .nav-links.open{transform:none;}
+    .nav-links a{padding:15px 22px;border-bottom:1px solid var(--line);}
+    .nav-toggle{display:block;}
+    .about-wrap{grid-template-columns:1fr;gap:24px;padding:30px 22px;}
+    .avatar{width:120px;height:120px;}
+    .skill-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header id="header">
+  <div class="wrap nav">
+    <div class="logo"><span>◆</span> AI Works</div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#works">Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">☰</button>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-glow glow-1"></div>
+  <div class="hero-glow glow-2"></div>
+  <div class="wrap hero-inner">
+    <h1>AIで<span class="neon-text">“作れる”</span>を<br>形にする。</h1>
+    <p class="sub">AIツールを駆使して、動くもの・伝わるものを作っています。ゲーム・アプリから図解・画像生成まで、アイデアを最短でカタチに。</p>
+    <div class="tools">
+      <span class="tool-pill">Manus</span>
+      <span class="tool-pill">NotebookLM</span>
+      <span class="tool-pill">Midjourney</span>
+      <span class="tool-pill">Claude</span>
+    </div>
+    <a href="#works" class="cta">作品を見る ↓</a>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ===== Works ===== -->
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="seclabel">Works</div>
+      <h2>制作実績</h2>
+    </div>
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">すべて</button>
+      <button class="filter-btn" data-filter="app">ゲーム/アプリ</button>
+      <button class="filter-btn" data-filter="info">インフォグラフィック</button>
+      <button class="filter-btn" data-filter="image">画像生成</button>
+    </div>
+
+    <div class="grid" id="grid">
+      <!-- Card 1 -->
+      <div class="card reveal" data-cat="app"
+           data-img="images/work01-tetris.png"
+           data-title="Tetris ゲーム"
+           data-desc="Manus で制作した、ネオングロー演出のテトリス。スコア・レベル・NEXT表示まで備えたブラウザで遊べる完成版。">
+        <div class="card-img"><img src="images/work01-tetris.png" alt="Tetris ゲーム"></div>
+        <div class="card-body">
+          <h3>Tetris ゲーム</h3>
+          <div class="card-tags">
+            <span class="tag purple">Manus</span>
+            <span class="tag">ゲーム/アプリ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card reveal" data-cat="info"
+           data-img="images/work02-infographic.png"
+           data-title="AIツール解説インフォグラフィック"
+           data-desc="NotebookLM で構成・制作した「用途別・主要AIツール5選」の図解。情報を整理し、一目で比較できるビジュアルに。">
+        <div class="card-img"><img src="images/work02-infographic.png" alt="AIツール解説インフォグラフィック"></div>
+        <div class="card-body">
+          <h3>AIツール解説インフォグラフィック</h3>
+          <div class="card-tags">
+            <span class="tag cyan">NotebookLM</span>
+            <span class="tag">インフォグラフィック</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== About ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="seclabel">About</div>
+      <h2>自己紹介</h2>
+    </div>
+
+    <div class="about-wrap reveal">
+      <div>
+        <div class="avatar">顔写真<br>/アイコン</div>
+        <div class="about-name">
+          <div class="nm">あなたの名前</div>
+          <div class="role">AIクリエイター</div>
+        </div>
+      </div>
+      <div>
+        <div class="about-lead">「AIを“使える”から“作れる”へ」</div>
+        <p class="about-text">
+          ここに自己紹介文が入ります。これまでの経歴 → AI制作を始めたきっかけ →
+          得意なこと・提供できること → どんな人と組みたいか、の流れで2〜5文程度に。
+          長くなりすぎず、読み手がスキャンできる温度感でまとめるのがおすすめです。
+        </p>
+        <div class="skill-grid">
+          <div class="skill-box t-yellow">
+            <div class="lab">使えるAIツール</div>
+            <span class="chip">Manus</span>
+            <span class="chip">NotebookLM</span>
+            <span class="chip">Midjourney</span>
+            <span class="chip">Claude</span>
+          </div>
+          <div class="skill-box t-cyan">
+            <div class="lab">できること / 提供物</div>
+            <span class="chip">ゲーム・アプリ制作</span>
+            <span class="chip">図解・インフォグラフィック</span>
+            <span class="chip">画像生成</span>
+          </div>
+        </div>
+        <div class="about-socials">
+          <a href="#">✕ / Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section id="contact">
+  <div class="wrap contact reveal">
+    <div class="seclabel">Contact</div>
+    <h2 class="sec-head" style="margin-bottom:20px;">お仕事のご相談</h2>
+    <p class="lead">AI制作物の依頼・ご相談はお気軽にどうぞ。「こんなものを作りたい」段階からご一緒できます。</p>
+    <div class="contact-btns">
+      <a href="mailto:your@email.com" class="btn-primary">メールで相談する</a>
+      <a href="#" class="btn-ghost">SNSのDM</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  © 2026 AI Works Portfolio — あなたの名前
+</footer>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="閉じる">×</button>
+  <div class="lb-inner">
+    <img id="lbImg" src="" alt="">
+    <div class="lb-caption">
+      <h3 id="lbTitle"></h3>
+      <p id="lbDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // --- Header scroll state ---
+  const header = document.getElementById('header');
+  addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', scrollY > 20);
+  });
+
+  // --- Mobile nav ---
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // --- Works filter ---
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => {
+        const show = (f === 'all' || card.dataset.cat === f);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // --- Lightbox ---
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbTitle = document.getElementById('lbTitle');
+  const lbDesc = document.getElementById('lbDesc');
+  function openLightbox(card){
+    lbImg.src = card.dataset.img;
+    lbImg.alt = card.dataset.title;
+    lbTitle.textContent = card.dataset.title;
+    lbDesc.textContent = card.dataset.desc;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  cards.forEach(card => card.addEventListener('click', () => openLightbox(card)));
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
+  addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+  // --- Scroll reveal ---
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
