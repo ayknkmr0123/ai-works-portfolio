@@ -3,447 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Works Portfolio｜AIで“作れる”を形にする</title>
-<meta name="description" content="AIツールを使った制作物のポートフォリオ。ゲーム・アプリ、インフォグラフィック、画像生成まで。Manus・NotebookLM・Midjourney などを駆使してアイデアを最短でカタチにします。">
-<link rel="canonical" href="https://ayknkmr0123.github.io/ai-works-portfolio/">
-<meta name="theme-color" content="#007cff">
-<meta name="color-scheme" content="light">
+<title>AI Works Portfolio｜AIで、つくる。</title>
+<meta name="description" content="生成AIを活用して制作した成果物をまとめたポートフォリオ。ゲーム制作・インフォグラフィックなどの実績を掲載しています。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff2e8b'/%3E%3Cstop offset='1' stop-color='%237a3ff2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900'%3EA%3C/text%3E%3C/svg%3E">
 
-<!-- OGP -->
+<!-- OGP / Twitter Card -->
 <meta property="og:type" content="website">
-<meta property="og:locale" content="ja_JP">
-<meta property="og:site_name" content="AI Works Portfolio">
-<meta property="og:title" content="AI Works Portfolio｜AIで“作れる”を形にする">
-<meta property="og:description" content="AIツールを使った制作物のポートフォリオ。ゲーム・アプリ、インフォグラフィック、画像生成まで。">
-<meta property="og:url" content="https://ayknkmr0123.github.io/ai-works-portfolio/">
-<meta property="og:image" content="https://ayknkmr0123.github.io/ai-works-portfolio/images/work02-infographic.png">
+<meta property="og:title" content="AI Works Portfolio｜AIで、つくる。">
+<meta property="og:description" content="生成AIを活用して制作した成果物をまとめたポートフォリオ。">
+<meta property="og:image" content="https://ayknkmr0123.github.io/ai-works-portfolio/images/work-ai-tools.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Works Portfolio｜AIで“作れる”を形にする">
-<meta name="twitter:description" content="AIツールを使った制作物のポートフォリオ。ゲーム・アプリ、図解、画像生成まで。">
-<meta name="twitter:image" content="https://ayknkmr0123.github.io/ai-works-portfolio/images/work02-infographic.png">
-
-<!-- favicon -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23007cff'/%3E%3Cpath d='M16 6l7 10-7 10-7-10z' fill='white'/%3E%3C/svg%3E">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
-
-<!-- 構造化データ -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@graph":[
-    {"@type":"WebSite","name":"AI Works Portfolio","url":"https://ayknkmr0123.github.io/ai-works-portfolio/","inLanguage":"ja"},
-    {"@type":"Person","name":"AI Works","jobTitle":"AIクリエイター","url":"https://ayknkmr0123.github.io/ai-works-portfolio/","knowsAbout":["生成AI","AIアプリ開発","インフォグラフィック","画像生成"]}
-  ]
-}
-</script>
 
 <style>
   :root{
-    --bg:#ffffff;
-    --bg-sub:#f7f9fc;
-    --text:#1a2233;
-    --text-sub:#5a6478;
-    --blue:#007cff;
-    --blue-dark:#0056b3;
-    --blue-soft:#e6f2ff;
-    --coral:#ff6b5c;
-    --coral-soft:#fff4f2;
-    --yellow:#ffe14d;
-    --line:#e6eaf2;
-    --shadow-sm:0 2px 10px rgba(26,34,51,.05);
-    --shadow-md:0 10px 30px rgba(26,34,51,.07);
-    --shadow-lg:0 16px 38px rgba(26,34,51,.1);
+    /* === design_prompt_unikoukokun.yaml 準拠 === */
+    --canvas:#ffffff;
+    --canvas-warm:#fff6ef;
+    --surface:#fffaf6;
+    --border:#f1e8e1;
+    --ink:#2b2b2b;
+    --ink-sub:#6b6b6b;
+    --primary:#ff2e8b;
+    --primary-deep:#e01f76;
+    --primary-light:#ffd6e8;
+    --orange:#ff7a1a;
+    --amber:#ffab2e;
+    --purple:#7a3ff2;
+    --shadow-soft:0 8px 24px -6px rgba(120,60,30,.12);
+    --shadow-float:0 16px 40px -10px rgba(120,60,30,.16);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;scroll-padding-top:80px;}
-  body{background:var(--bg);color:var(--text);font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
-  .seclabel{font-size:.72rem;color:var(--blue);letter-spacing:.22em;text-transform:uppercase;font-weight:700;}
-  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px;}
-  .skip-link{position:absolute;left:-999px;top:0;background:var(--blue);color:#fff;padding:10px 16px;border-radius:0 0 8px 0;z-index:200;}
-  .skip-link:focus{left:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic UI",sans-serif;
+    color:var(--ink);
+    height:100vh;
+    overflow:hidden;                 /* 1ページ・スクロールなし */
+    display:flex;
+    flex-direction:column;
+    padding:clamp(24px,4vw,48px);
+    background:
+      radial-gradient(120% 90% at 100% 0%,#ffe9d6 0%,rgba(255,233,214,0) 55%),
+      radial-gradient(120% 90% at 0% 100%,#ffe1ef 0%,rgba(255,225,239,0) 50%),
+      var(--canvas-warm);
+  }
 
-  header{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(12px);background:rgba(255,255,255,.7);border-bottom:1px solid transparent;transition:border-color .3s, background .3s, box-shadow .3s;}
-  header.scrolled{border-bottom-color:var(--line);background:rgba(255,255,255,.92);box-shadow:0 2px 20px rgba(26,34,51,.04);}
-  .nav{display:flex;justify-content:space-between;align-items:center;height:64px;}
-  .logo{font-weight:800;letter-spacing:.02em;font-size:1.05rem;display:flex;align-items:center;gap:8px;}
-  .logo .mark{width:22px;height:22px;display:inline-block;}
-  .nav-links{display:flex;gap:26px;font-size:.85rem;}
-  .nav-links a{color:var(--text-sub);transition:color .2s;font-weight:500;position:relative;padding:4px 0;}
-  .nav-links a:hover,.nav-links a.current{color:var(--blue);}
-  .nav-links a.current::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--blue);border-radius:2px;}
-  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer;}
+  /* ── ヘッダー ── */
+  header{flex:0 0 auto;margin-bottom:clamp(18px,3vh,32px);}
+  .eyebrow{
+    display:inline-block;font-size:12px;letter-spacing:.16em;font-weight:700;
+    color:var(--primary);background:var(--primary-light);
+    padding:5px 14px;border-radius:999px;
+  }
+  h1{
+    font-size:clamp(34px,5.4vw,60px);font-weight:900;letter-spacing:-.01em;
+    line-height:1.05;margin:12px 0 10px;
+    background:linear-gradient(100deg,var(--primary) 0%,var(--purple) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  h1 .spark{-webkit-text-fill-color:initial;color:var(--amber);font-size:.7em;}
+  .lead{font-size:clamp(13px,1.4vw,16px);color:var(--ink-sub);max-width:580px;}
 
-  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(circle at 85% 15%, var(--blue-soft), transparent 45%),radial-gradient(circle at 10% 90%, var(--coral-soft), transparent 40%),var(--bg);}
-  .hero-inner{position:relative;z-index:2;padding-top:64px;}
-  .hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800;line-height:1.25;letter-spacing:.01em;}
-  .hero h1 .accent{color:var(--blue);position:relative;}
-  .hero h1 .accent::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.28em;background:var(--yellow);z-index:-1;opacity:.85;border-radius:4px;}
-  .hero .sub{color:var(--text-sub);font-size:clamp(.95rem,2vw,1.15rem);margin-top:22px;max-width:600px;}
-  .hero .tools{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px;}
-  .tool-pill{font-size:.74rem;padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--text-sub);background:#fff;}
-  .hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
-  .btn{display:inline-block;padding:14px 32px;border-radius:999px;font-weight:700;font-size:.92rem;transition:transform .2s, box-shadow .3s, background .2s, color .2s, border-color .2s;cursor:pointer;}
-  .btn-primary{background:var(--blue);color:#fff;box-shadow:0 8px 20px rgba(0,124,255,.25);}
-  .btn-primary:hover{transform:translateY(-2px);background:var(--blue-dark);box-shadow:0 12px 26px rgba(0,124,255,.32);}
-  .btn-ghost{border:1px solid var(--line);color:var(--text);background:#fff;}
-  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
-  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--text-sub);font-size:.7rem;letter-spacing:.2em;animation:bob 1.8s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+  /* ── 作品グリッド ── */
+  .gallery{
+    flex:1 1 auto;min-height:0;display:grid;
+    grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.2vw,28px);
+  }
+  .card{
+    position:relative;min-height:0;border:1px solid var(--border);
+    border-radius:20px;overflow:hidden;background:var(--surface);cursor:pointer;
+    display:flex;flex-direction:column;box-shadow:var(--shadow-soft);
+    transition:transform .28s cubic-bezier(.4,.4,0,1),box-shadow .28s cubic-bezier(.4,.4,0,1);
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-float);}
+  .card:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+  .thumb{
+    flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;
+    padding:18px;background:radial-gradient(120% 120% at 50% 0%,#ffffff 0%,#fff1e6 100%);
+  }
+  .thumb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;}
+  .meta{flex:0 0 auto;padding:14px 18px 16px;border-top:1px solid var(--border);background:#fff;}
+  .meta h2{font-size:clamp(15px,1.6vw,18px);font-weight:700;}
+  .tags{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;}
+  .tag{
+    font-size:11px;font-weight:700;color:var(--ink-sub);
+    background:#f6efe9;border-radius:999px;padding:4px 11px;
+  }
+  .tag.ai{color:#fff;background:linear-gradient(100deg,var(--primary) 0%,var(--orange) 100%);}
 
-  section{padding:96px 0;}
-  .sec-head{text-align:center;margin-bottom:48px;}
-  .sec-head h2{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;margin-top:8px;}
-  .sec-head p{color:var(--text-sub);margin-top:10px;font-size:.92rem;}
+  /* ── ライトボックス ── */
+  .lb{
+    position:fixed;inset:0;background:rgba(40,20,30,.78);display:none;
+    align-items:center;justify-content:center;padding:5vh 5vw;z-index:50;
+  }
+  .lb.open{display:flex;}
+  .lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.45);}
+  .lb-close{
+    position:absolute;top:22px;right:26px;width:44px;height:44px;border-radius:50%;
+    border:none;cursor:pointer;background:var(--primary);color:#fff;font-size:22px;
+    box-shadow:var(--shadow-soft);transition:background .2s,transform .2s;
+  }
+  .lb-close:hover{background:var(--primary-deep);transform:scale(1.06);}
 
-  .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;}
-  .svc-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;box-shadow:var(--shadow-sm);transition:transform .3s, box-shadow .3s;}
-  .svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
-  .svc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--blue-soft);margin-bottom:16px;}
-  .svc-icon svg{width:26px;height:26px;stroke:var(--blue);fill:none;stroke-width:1.8;}
-  .svc-card.c2 .svc-icon{background:var(--coral-soft);}
-  .svc-card.c2 .svc-icon svg{stroke:var(--coral);}
-  .svc-card.c3 .svc-icon{background:#fffbe6;}
-  .svc-card.c3 .svc-icon svg{stroke:#d4a800;}
-  .svc-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px;}
-  .svc-card p{color:var(--text-sub);font-size:.88rem;}
-
-  .works{background:var(--bg-sub);}
-  .filters{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
-  .filter-btn{font-size:.8rem;padding:9px 20px;border-radius:999px;cursor:pointer;font-weight:500;background:#fff;border:1px solid var(--line);color:var(--text-sub);transition:all .2s;}
-  .filter-btn:hover{color:var(--blue);border-color:var(--blue);}
-  .filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 6px 16px rgba(0,124,255,.22);}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
-  .card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .3s, box-shadow .3s, border-color .3s;text-align:left;width:100%;font:inherit;color:inherit;padding:0;}
-  .card:hover{transform:translateY(-6px);border-color:var(--blue-soft);box-shadow:var(--shadow-lg);}
-  .card-img{aspect-ratio:16/10;overflow:hidden;background:var(--bg-sub);}
-  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
-  .card:hover .card-img img{transform:scale(1.05);}
-  .card-body{padding:16px 18px 20px;}
-  .card-body h3{font-size:1.05rem;font-weight:700;}
-  .card-body .excerpt{color:var(--text-sub);font-size:.82rem;margin-top:6px;}
-  .card-tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;}
-  .tag{font-size:.68rem;padding:4px 11px;border-radius:999px;border:1px solid var(--line);color:var(--text-sub);background:#fff;}
-  .tag.blue{color:var(--blue);border-color:var(--blue-soft);background:var(--blue-soft);}
-  .tag.coral{color:var(--coral);border-color:#ffe2de;background:var(--coral-soft);}
-
-  .about-wrap{background:#fff;border:1px solid var(--line);border-radius:24px;padding:42px 38px;display:grid;grid-template-columns:160px 1fr;gap:36px;align-items:start;box-shadow:var(--shadow-md);}
-  .avatar{width:140px;height:140px;border-radius:50%;margin:0 auto;background:var(--blue-soft);border:3px solid #fff;box-shadow:0 0 0 1px var(--line), 0 8px 20px rgba(0,124,255,.12);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:.72rem;text-align:center;font-weight:500;overflow:hidden;}
-  .avatar img{width:100%;height:100%;object-fit:cover;}
-  .about-name{text-align:center;margin-top:14px;}
-  .about-name .nm{font-weight:800;font-size:1.05rem;}
-  .about-name .role{font-size:.74rem;color:var(--text-sub);}
-  .about-lead{font-size:1.15rem;font-weight:700;margin-bottom:12px;}
-  .about-lead .hl{background:linear-gradient(transparent 60%, var(--yellow) 60%);padding:0 2px;}
-  .about-text{color:var(--text-sub);font-size:.92rem;margin-bottom:24px;}
-  .skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .skill-box{background:var(--bg-sub);border:1px solid var(--line);border-radius:14px;padding:16px 18px;}
-  .skill-box .lab{font-size:.66rem;letter-spacing:.14em;margin-bottom:11px;font-weight:700;}
-  .skill-box.t-blue .lab{color:var(--blue);}
-  .skill-box.t-coral .lab{color:var(--coral);}
-  .chip{display:inline-block;font-size:.72rem;padding:5px 12px;border-radius:999px;margin:3px 5px 3px 0;border:1px solid var(--line);color:var(--text-sub);background:#fff;}
-  .skill-box.t-blue .chip{border-color:var(--blue-soft);color:var(--blue);}
-  .skill-box.t-coral .chip{border-color:#ffe2de;color:var(--coral);}
-  .about-socials{margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;}
-  .about-socials a{font-size:.8rem;color:var(--text-sub);border:1px solid var(--line);padding:8px 17px;border-radius:999px;transition:all .2s;}
-  .about-socials a:hover{color:var(--blue);border-color:var(--blue);}
-
-  .contact{text-align:center;background:var(--bg-sub);}
-  .contact .lead{color:var(--text-sub);max-width:520px;margin:0 auto 30px;}
-  .contact-btns{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
-
-  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--text-sub);font-size:.78rem;}
-
-  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(26,34,51,.55);display:none;align-items:center;justify-content:center;padding:30px;backdrop-filter:blur(6px);}
-  .lightbox.open{display:flex;animation:fade .25s ease;}
-  @keyframes fade{from{opacity:0;}to{opacity:1;}}
-  .lb-inner{max-width:920px;width:100%;text-align:center;background:#fff;border-radius:20px;padding:26px;box-shadow:0 30px 70px rgba(26,34,51,.3);}
-  .lb-inner img{max-height:62vh;width:auto;margin:0 auto;border-radius:12px;border:1px solid var(--line);}
-  .lb-caption{margin-top:18px;}
-  .lb-caption h3{font-size:1.15rem;font-weight:700;}
-  .lb-caption p{color:var(--text-sub);font-size:.88rem;margin-top:8px;}
-  .lb-close{position:absolute;top:22px;right:28px;background:#fff;border:1px solid var(--line);color:var(--text);width:42px;height:42px;border-radius:50%;font-size:1.4rem;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;}
-  .lb-close:hover{color:var(--blue);border-color:var(--blue);}
-
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease;}
-  .reveal.show{opacity:1;transform:none;}
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;}.reveal{opacity:1;transform:none;transition:none;}}
-
-  @media(max-width:720px){
-    .nav-links{position:fixed;top:64px;right:0;flex-direction:column;gap:0;background:#fff;border-left:1px solid var(--line);border-bottom:1px solid var(--line);width:200px;transform:translateX(100%);transition:transform .3s;box-shadow:-6px 8px 20px rgba(26,34,51,.06);}
-    .nav-links.open{transform:none;}
-    .nav-links a{padding:15px 22px;border-bottom:1px solid var(--line);}
-    .nav-links a.current::after{display:none;}
-    .nav-toggle{display:block;}
-    .about-wrap{grid-template-columns:1fr;gap:24px;padding:30px 22px;}
-    .avatar{width:120px;height:120px;}
-    .skill-grid{grid-template-columns:1fr;}
-    section{padding:72px 0;}
+  /* ── レスポンシブ：狭い画面はスクロール許可で縦積み ── */
+  @media(max-width:680px){
+    body{overflow:auto;height:auto;min-height:100vh;}
+    .gallery{grid-template-columns:1fr;}
+    .card{min-height:60vh;}
   }
 </style>
 </head>
 <body>
-<a href="#works" class="skip-link">本文へスキップ</a>
 
-<header id="header">
-  <div class="wrap nav">
-    <a href="#top" class="logo" aria-label="AI Works ホーム">
-      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#007cff"/><path d="M16 6l7 10-7 10-7-10z" fill="#fff"/></svg>
-      AI Works
-    </a>
-    <nav class="nav-links" id="navLinks" aria-label="メインナビゲーション">
-      <a href="#services">Services</a>
-      <a href="#works">Works</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="メニューを開閉" aria-expanded="false">☰</button>
-  </div>
-</header>
+  <header>
+    <span class="eyebrow">AI WORKS PORTFOLIO</span>
+    <h1>AIで、つくる。<span class="spark">✨</span></h1>
+    <p class="lead">生成AIを活用して制作した成果物をまとめています。各作品はクリックで拡大表示できます。</p>
+  </header>
 
-<main id="top">
+  <main class="gallery">
 
-<section class="hero" aria-label="ヒーロー">
-  <div class="wrap hero-inner">
-    <h1>AIで<span class="accent">“作れる”</span>を<br>形にする。</h1>
-    <p class="sub">AIツールを駆使して、動くもの・伝わるものを作っています。ゲーム・アプリから図解・画像生成まで、アイデアを最短でカタチに。</p>
-    <div class="tools">
-      <span class="tool-pill">Manus</span>
-      <span class="tool-pill">NotebookLM</span>
-      <span class="tool-pill">Midjourney</span>
-      <span class="tool-pill">Claude</span>
-    </div>
-    <div class="hero-cta">
-      <a href="#works" class="btn btn-primary">作品を見る ↓</a>
-      <a href="#contact" class="btn btn-ghost">お問い合わせ</a>
-    </div>
-  </div>
-  <div class="scroll-hint">SCROLL</div>
-</section>
-
-<section id="services">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="seclabel">Services</div>
-      <h2>できること</h2>
-      <p>AIを活用して、企画から制作までワンストップで対応します。</p>
-    </div>
-    <div class="svc-grid">
-      <div class="svc-card c1 reveal">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M8 11l-2 2 2 2M16 11l2 2-2 2"/></svg></div>
-        <h3>ゲーム・アプリ制作</h3>
-        <p>ブラウザで動くゲームやツールを、AIを使って素早く形にします。アイデアの検証から完成まで。</p>
+    <figure class="card" tabindex="0" role="button" aria-label="ネオン・テトリスを拡大表示" data-img="images/work-tetris.png">
+      <div class="thumb">
+        <img src="images/work-tetris.png" alt="ネオンカラーで描かれたブラウザ版テトリスゲームの画面" loading="lazy">
       </div>
-      <div class="svc-card c2 reveal">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-3"/></svg></div>
-        <h3>図解・インフォグラフィック</h3>
-        <p>複雑な情報を整理し、一目で伝わるビジュアルに。資料・SNS・記事向けの図解を制作します。</p>
-      </div>
-      <div class="svc-card c3 reveal">
-        <div class="svc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <h3>画像生成</h3>
-        <p>用途に合わせたビジュアルを生成AIで制作。サムネ・バナー・イメージ画像などに対応します。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="works" class="works">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="seclabel">Works</div>
-      <h2>制作実績</h2>
-      <p>クリックすると拡大表示と解説が見られます。</p>
-    </div>
-
-    <div class="filters reveal" role="group" aria-label="作品の絞り込み">
-      <button class="filter-btn active" data-filter="all">すべて</button>
-      <button class="filter-btn" data-filter="app">ゲーム/アプリ</button>
-      <button class="filter-btn" data-filter="info">インフォグラフィック</button>
-    </div>
-
-    <div class="grid" id="grid">
-      <button class="card reveal" data-cat="app"
-           data-img="images/work01-tetris.png"
-           data-title="Tetris ゲーム"
-           data-desc="Manus で制作した、ネオングロー演出のテトリス。スコア・レベル・NEXTブロック表示まで備え、ブラウザでそのまま遊べる完成版です。落下・回転・ライン消去のロジックも実装しています。">
-        <span class="card-img"><img src="images/work01-tetris.png" alt="ネオン演出のテトリスゲーム画面。スコア・レベル・NEXT表示付き"></span>
-        <span class="card-body">
-          <span style="display:block"><h3>Tetris ゲーム</h3></span>
-          <span class="excerpt">ブラウザで遊べる、スコア・レベル付きの完成版テトリス。</span>
-          <span class="card-tags">
-            <span class="tag blue">Manus</span>
-            <span class="tag">ゲーム/アプリ</span>
-          </span>
-        </span>
-      </button>
-
-      <button class="card reveal" data-cat="info"
-           data-img="images/work02-infographic.png"
-           data-title="AIツール解説インフォグラフィック"
-           data-desc="NotebookLM で構成・制作した「用途別・主要AIツール5選」の図解。各ツールの特徴・料金・向いている用途を整理し、一目で比較できるビジュアルにまとめました。">
-        <span class="card-img"><img src="images/work02-infographic.png" alt="用途別の主要AIツール5選をまとめたインフォグラフィック"></span>
-        <span class="card-body">
-          <span style="display:block"><h3>AIツール解説インフォグラフィック</h3></span>
-          <span class="excerpt">主要AIツール5選を、特徴・料金・用途で比較した図解。</span>
-          <span class="card-tags">
-            <span class="tag coral">NotebookLM</span>
-            <span class="tag">インフォグラフィック</span>
-          </span>
-        </span>
-      </button>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="seclabel">About</div>
-      <h2>自己紹介</h2>
-    </div>
-
-    <div class="about-wrap reveal">
-      <div>
-        <div class="avatar">顔写真<br>/アイコン</div>
-        <div class="about-name">
-          <div class="nm">あなたのお名前</div>
-          <div class="role">AIクリエイター</div>
+      <figcaption class="meta">
+        <h2>ネオン・テトリス（ブラウザゲーム）</h2>
+        <div class="tags">
+          <span class="tag ai">Made with Manus</span>
+          <span class="tag">ゲーム制作</span>
+          <span class="tag">Web</span>
         </div>
+      </figcaption>
+    </figure>
+
+    <figure class="card" tabindex="0" role="button" aria-label="主要AIツール5選インフォグラフィックを拡大表示" data-img="images/work-ai-tools.png">
+      <div class="thumb">
+        <img src="images/work-ai-tools.png" alt="主要AIツール5選を紹介するインフォグラフィック" loading="lazy">
       </div>
-      <div>
-        <div class="about-lead">「AIを<span class="hl">“使える”</span>から<span class="hl">“作れる”</span>へ」</div>
-        <p class="about-text">
-          ここに自己紹介文が入ります。これまでの経歴 → AI制作を始めたきっかけ →
-          得意なこと・提供できること → どんな人と組みたいか、の流れで2〜5文程度に。
-          長くなりすぎず、読み手がスキャンできる温度感でまとめるのがおすすめです。
-        </p>
-        <div class="skill-grid">
-          <div class="skill-box t-blue">
-            <div class="lab">使えるAIツール</div>
-            <span class="chip">Manus</span>
-            <span class="chip">NotebookLM</span>
-            <span class="chip">Midjourney</span>
-            <span class="chip">Claude</span>
-          </div>
-          <div class="skill-box t-coral">
-            <div class="lab">できること / 提供物</div>
-            <span class="chip">ゲーム・アプリ制作</span>
-            <span class="chip">図解・インフォグラフィック</span>
-            <span class="chip">画像生成</span>
-          </div>
+      <figcaption class="meta">
+        <h2>主要AIツール5選 インフォグラフィック</h2>
+        <div class="tags">
+          <span class="tag ai">NotebookLM</span>
+          <span class="tag">情報設計</span>
+          <span class="tag">デザイン</span>
         </div>
-        <div class="about-socials">
-          <a href="#" rel="noopener">✕ / Twitter</a>
-          <a href="#" rel="noopener">Instagram</a>
-          <a href="#" rel="noopener">GitHub</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </figcaption>
+    </figure>
 
-<section id="contact" class="contact">
-  <div class="wrap reveal">
-    <div class="seclabel">Contact</div>
-    <h2 class="sec-head" style="margin-bottom:20px;">お仕事のご相談</h2>
-    <p class="lead">AI制作物の依頼・ご相談はお気軽にどうぞ。「こんなものを作りたい」という段階からご一緒できます。</p>
-    <div class="contact-btns">
-      <a href="mailto:your@email.com" class="btn btn-primary">メールで相談する</a>
-      <a href="#" class="btn btn-ghost" rel="noopener">SNSのDM</a>
-    </div>
-  </div>
-</section>
+  </main>
 
-</main>
-
-<footer>
-  © 2026 AI Works Portfolio — あなたのお名前
-</footer>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="作品の拡大表示">
-  <button class="lb-close" id="lbClose" aria-label="閉じる">×</button>
-  <div class="lb-inner">
+  <!-- ライトボックス -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="作品の拡大表示">
+    <button class="lb-close" id="lbClose" aria-label="閉じる">&times;</button>
     <img id="lbImg" src="" alt="">
-    <div class="lb-caption">
-      <h3 id="lbTitle"></h3>
-      <p id="lbDesc"></p>
-    </div>
   </div>
-</div>
 
-<script>
-  const header = document.getElementById('header');
-  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 20));
-
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.setAttribute('aria-expanded','false');
-  }));
-
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card');
-  filterBtns.forEach(btn => btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    cards.forEach(card => { card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none'; });
-  }));
-
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lbImg');
-  const lbTitle = document.getElementById('lbTitle');
-  const lbDesc = document.getElementById('lbDesc');
-  let lastFocused = null;
-  function openLightbox(card){
-    lastFocused = card;
-    lbImg.src = card.dataset.img;
-    lbImg.alt = card.dataset.title;
-    lbTitle.textContent = card.dataset.title;
-    lbDesc.textContent = card.dataset.desc;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('lbClose').focus();
-  }
-  function closeLightbox(){
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-    if(lastFocused) lastFocused.focus();
-  }
-  cards.forEach(card => card.addEventListener('click', () => openLightbox(card)));
-  document.getElementById('lbClose').addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
-  addEventListener('keydown', e => { if(e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target);} });
-  }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  const navMap = {};
-  document.querySelectorAll('.nav-links a').forEach(a => { navMap[a.getAttribute('href').slice(1)] = a; });
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if(en.isIntersecting){
-        Object.values(navMap).forEach(a => a.classList.remove('current'));
-        const link = navMap[en.target.id];
-        if(link) link.classList.add('current');
-      }
+  <script>
+    const lb = document.getElementById('lb');
+    const lbImg = document.getElementById('lbImg');
+    function openLb(card){
+      lbImg.src = card.dataset.img;
+      lbImg.alt = card.querySelector('img').alt;
+      lb.classList.add('open');
+    }
+    function closeLb(){ lb.classList.remove('open'); lbImg.src=''; }
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('click',()=>openLb(card));
+      card.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(card); }
+      });
     });
-  }, {rootMargin:"-45% 0px -50% 0px"});
-  ['services','works','about','contact'].forEach(id => { const el = document.getElementById(id); if(el) spy.observe(el); });
-</script>
+    document.getElementById('lbClose').addEventListener('click',closeLb);
+    lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
+  </script>
 
 </body>
 </html>
